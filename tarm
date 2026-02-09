@@ -11,6 +11,7 @@ arg = sys.argv[1]
 
 if arg in ("--version", "-v"):
     print("Tarm - TAR.REMOVE v1.1")
+    print("Build on 9/2/2026")
     print("by spaceguythe1 on github :)")
     sys.exit(0)
 
