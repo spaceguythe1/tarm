@@ -17,7 +17,7 @@ tarm (the file you want to extract, MUST END IN .tar.gz or will just delete file
 
 OR
 
-tarm --version
+tarm --version (or -v)
 prints version (what else would it do?)
 
 i only have support for .tar.gz rn.
