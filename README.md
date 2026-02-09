@@ -6,7 +6,7 @@ INSTALL GUIDE
 
 run this:
 ```
-git clone https://github.com/spaceguythe1/tarm.git && sudo mv ~/tarm/tarm /usr/local/bin && sudo chmod +x /usr/local/bin/tarm && sudo rm -rf ~/tarm
+sudo rm -rf /usr/local/bin/tarm git clone https://github.com/spaceguythe1/tarm.git && sudo mv ~/tarm/tarm /usr/local/bin && sudo chmod +x /usr/local/bin/tarm && sudo rm -rf ~/tarm
 ```
 
 its installed.
