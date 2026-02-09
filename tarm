@@ -4,13 +4,20 @@ import subprocess
 from pathlib import Path
 
 if len(sys.argv) < 2:
-    print("Usage: tarm.py <archive.tar.gz>")
+    print("Usage: tarm <archive.tar.gz>")
     sys.exit(1)
+
+arg = sys.argv[1]
+
+if arg in ("--version", "-v"):
+    print("Tarm - TAR.REMOVE v1.1")
+    print("by spaceguythe1 on github :)")
+    sys.exit(0)
 
 archive = Path(sys.argv[1]).expanduser()
 
-if not archive.is_file():
-    print(f"Archive not found: {archive}")
+if not archive.is_file(): #OTHER COMMANDS
+    print("Not a file.")
     sys.exit(1)
 
 archive = archive.resolve()
