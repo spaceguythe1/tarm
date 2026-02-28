@@ -4,33 +4,61 @@ import subprocess
 from pathlib import Path
 
 if len(sys.argv) < 2:
-    print("Usage: tarm <archive.tar.gz>")
+    print("Usage: tarm <archive>")
     sys.exit(1)
 
 arg = sys.argv[1]
 
 if arg in ("--version", "-v"):
-    print("Tarm - TAR.REMOVE v1.1")
-    print("Build on 9/2/2026")
+    print("Tarm - TAR.REMOVE v1.2")
+    print("Build on 28/2/2026")
     print("by spaceguythe1 on github :)")
     sys.exit(0)
 
-archive = Path(sys.argv[1]).expanduser()
+archive = Path(arg).expanduser()
 
-if not archive.is_file(): #OTHER COMMANDS
+if not archive.is_file():
     print("Not a file.")
     sys.exit(1)
 
 archive = archive.resolve()
+suffix = archive.suffix.lower()
 
 print(f"Extracting {archive}")
 
-subprocess.run(
-    ["tar", "-xzvf", str(archive)],
-    cwd=archive.parent,          # 👈 critical line
-    stdin=subprocess.DEVNULL,
-    check=True
-)
+try:
+    if suffix in [".gz", ".tgz"] or archive.name.endswith(".tar.gz"):
+        subprocess.run(
+            ["tar", "-xzvf", str(archive)],
+            cwd=archive.parent,
+            stdin=subprocess.DEVNULL,
+            check=True
+        )
 
-archive.unlink()
-print("Archive removed")
+    elif suffix == ".tar":
+        subprocess.run(
+            ["tar", "-xvf", str(archive)],
+            cwd=archive.parent,
+            stdin=subprocess.DEVNULL,
+            check=True
+        )
+
+    elif suffix == ".zip":
+        subprocess.run(
+            ["unzip", str(archive)],
+            cwd=archive.parent,
+            stdin=subprocess.DEVNULL,
+            check=True
+        )
+
+    else:
+        print("Unsupported archive type.")
+        sys.exit(1)
+
+    archive.unlink()
+    print("Archive removed")
+
+except subprocess.CalledProcessError:
+    print("Extraction failed.")
+    sys.exit(1)
+# hi there :)
